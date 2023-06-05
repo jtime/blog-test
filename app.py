@@ -30,10 +30,13 @@ gravatar = Gravatar(app,
 ##CONNECT TO DB
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 #遠端
-#load_dotenv()
+# load_dotenv()
 # xx = os.getenv("DATABASE_URL")
 # print(xx)
+# app.config['SQLALCHEMY_DATABASE_URI'] =xx
+#近端
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+
 #postgres://blog_test_user:yApCNL9nKDYXEBB7KAyFpEkck1QMyiXu@dpg-cht1933hp8u4v7rusr2g-a.oregon-postgres.render.com/blog_test
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.app_context().push()
@@ -68,8 +71,8 @@ class Users(UserMixin, db.Model):
     __tablename__ = "blog_users"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(1000))
-    email = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100))
+    email = db.Column(db.String(300), unique=True)
+    password = db.Column(db.String(300))
     # 一對多的一
     # 設定雙向關係
     posts = relationship("BlogPost", back_populates="author")
