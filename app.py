@@ -29,10 +29,11 @@ gravatar = Gravatar(app,
 
 ##CONNECT TO DB
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
-load_dotenv()
-xx = os.getenv("DATABASE_URL")
-print(xx)
-app.config['SQLALCHEMY_DATABASE_URI'] = xx
+#遠端
+#load_dotenv()
+# xx = os.getenv("DATABASE_URL")
+# print(xx)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 #postgres://blog_test_user:yApCNL9nKDYXEBB7KAyFpEkck1QMyiXu@dpg-cht1933hp8u4v7rusr2g-a.oregon-postgres.render.com/blog_test
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.app_context().push()
