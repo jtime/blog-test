@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 from flask import Flask, render_template, redirect, url_for, flash, request, abort
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
@@ -9,6 +11,7 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, cur
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from flask_gravatar import Gravatar
 from functools import wraps
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -25,7 +28,12 @@ gravatar = Gravatar(app,
 
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+load_dotenv()
+xx = os.getenv("DATABASE_URL")
+print(xx)
+app.config['SQLALCHEMY_DATABASE_URI'] = xx
+#postgres://blog_test_user:yApCNL9nKDYXEBB7KAyFpEkck1QMyiXu@dpg-cht1933hp8u4v7rusr2g-a.oregon-postgres.render.com/blog_test
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.app_context().push()
 db = SQLAlchemy(app)
